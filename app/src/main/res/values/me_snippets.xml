@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Format for each section
+item 1: Title of snippet
+item 2: Description of snippet
+item 3: Documentation link for more info on snippet
+item 4: version endpoint (beta, v1, v2, etc..)
+item 5: is admin account required to run snippet (true/false)
+-->
+
+<resources>
+    <!-- The name of this section-->
+    <string name="section_me">/me</string>
+
+    <string-array name="get_me_contacts">
+        <item>GET: Get user\'s contacts</item>
+        <item>Gets information about the signed-in user.</item>
+        <item>https://graph.microsoft.io/docs/api-reference/v1.0/api/user_get</item>
+        <item>v1.0</item>
+        <item>false</item>
+    </string-array>
+
+
+</resources>
