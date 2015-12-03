@@ -54,11 +54,13 @@ public class SnippetListAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(id, parent, false);
         }
 
-        TextView name = (TextView) convertView.findViewById(R.id.txt_snippet_name);
-        name.setText(clickedSnippet.getName());
+
 
         //Set text to indicate if Admin account is required to run the snippet
         if (!isSegment) {
+            TextView name = (TextView) convertView.findViewById(R.id.txt_snippet_name);
+            name.setText(clickedSnippet.getName());
+
             TextView adminIndicator = (TextView) convertView.findViewById(R.id.admin_indicator);
             if (adminIndicator != null) {
                 if (clickedSnippet.getIsAdminRequiredAdmin()) {
@@ -70,6 +72,8 @@ public class SnippetListAdapter extends BaseAdapter {
                     adminIndicator.setVisibility(View.GONE);
                 }
             }
+        } else {
+            convertView.setVisibility(View.INVISIBLE);
         }
 
         //Set text to indicate if this is a beta version snippet

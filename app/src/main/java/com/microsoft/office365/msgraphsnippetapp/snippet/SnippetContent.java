@@ -19,8 +19,7 @@ public class SnippetContent {
     static {
         AbstractSnippet<?, ?>[][] baseSnippets = new AbstractSnippet<?, ?>[][]{
 
-                getMeSnippets(),
-                getMessageSnippets(),
+                getMeSnippets()
         };
 
         for (AbstractSnippet<?, ?>[] snippetArray : baseSnippets) {

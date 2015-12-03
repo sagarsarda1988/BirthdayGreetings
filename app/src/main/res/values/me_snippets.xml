@@ -11,7 +11,7 @@ item 5: is admin account required to run snippet (true/false)
     <string name="section_me">/me</string>
 
     <string-array name="get_me_contacts">
-        <item>GET: Get user\'s contacts</item>
+        <item>Check Today\'s Birthdays</item>
         <item>Gets information about the signed-in user.</item>
         <item>https://graph.microsoft.io/docs/api-reference/v1.0/api/user_get</item>
         <item>v1.0</item>

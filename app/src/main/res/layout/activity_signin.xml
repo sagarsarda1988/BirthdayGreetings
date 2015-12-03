@@ -9,14 +9,18 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/signin_description" />
+        android:text="@string/signin_description"
+        android:textSize="18sp"
+        android:gravity="center"/>
 
     <Button
         android:id="@+id/o365_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/signin_button" />
+        android:text="@string/signin_button"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

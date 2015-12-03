@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class ListBirthdayActivity extends Activity implements Callback<Response> {
+public class ListBirthdayActivity extends Activity {
 
     int selectedContact = 1;
     CustomAdapter adapter;
@@ -105,14 +106,16 @@ public class ListBirthdayActivity extends Activity implements Callback<Response>
         // load the contents
         String subject = "Did you get my Video Message?";
         String body = "Happy Birthday... enjoy Birthday Video that I sent you.";
-        String email = getEmail();
+        //String email = "sagar@androidBot.onmicrosoft.com";//getEmail();
 
+        String email = getEmail();
+        Log.d("2222", "send to "+email);
         // make it
         MessageWrapperVO msgWrapper = createMessage(subject, body, email);
 
         // send it
-        //service.createNewMail("v1.0", msgWrapper, getSetUpCallback());
-        service.createNewMail("v1.0", msgWrapper, null);
+        service.createNewMail("v1.0", msgWrapper, getSetUpCallback());
+        //service.createNewMail("v1.0", msgWrapper, null);
     }
 
     private static <T> T create(Class<T> clazz) {
@@ -165,6 +168,7 @@ public class ListBirthdayActivity extends Activity implements Callback<Response>
         body.content = msgBody;
         msg.body = body;
 
+
         MessageWrapperVO wrapper = new MessageWrapperVO();
         wrapper.message = msg;
         wrapper.saveToSentItems = true;
@@ -193,10 +197,12 @@ public class ListBirthdayActivity extends Activity implements Callback<Response>
         Uri uri = resolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, content);*/
 
         String email = getEmail();
+        String name = getName();
 
 
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Title");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Happy Birthday "+name);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT,"Hey, Check out the video I created just for you on your birthday!!!");
         String[] array = new String[1];
         array[0] = email;
         sharingIntent.putExtra(Intent.EXTRA_EMAIL, array);
@@ -220,16 +226,19 @@ public class ListBirthdayActivity extends Activity implements Callback<Response>
         return email;
     }
 
+    public String getName() {
+        String data = this.adapter.getItem(this.selectedContact);
+        String email = "";
+        try {
+            JSONObject dataJson = new JSONObject(data);
+            email = dataJson.getString("displayName");
 
-    @Override
-    public void success(Response response, Response response2) {
-
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return email;
     }
 
-    @Override
-    public void failure(RetrofitError error) {
-
-    }
 
     public class CustomAdapter extends ArrayAdapter<String>{
 
@@ -264,7 +273,10 @@ public class ListBirthdayActivity extends Activity implements Callback<Response>
             TextView text = (TextView) convertView.findViewById(android.R.id.text1);
             try {
                 JSONObject json = new JSONObject(data.get(position));
+                text.setTextColor(Color.BLACK);
+                text.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 text.setText(json.getString("displayName"));
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

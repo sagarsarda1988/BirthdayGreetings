@@ -168,6 +168,7 @@ public class SnippetDetailFragment<T, Result>
 
     @OnClick(btn_run)
     public void onRunClicked(Button btn) {
+        Log.d("2222", "onRunClicked");
         mRequestUrl.setText("");
         mResponseHeaders.setText("");
         mResponseBody.setText("");
@@ -238,6 +239,8 @@ public class SnippetDetailFragment<T, Result>
             mProgressbar.setVisibility(View.VISIBLE);
             mItem.setUp(AbstractSnippet.sServices, getSetUpCallback());
         }
+
+        mRunButton.performClick();
     }
 
     private retrofit.Callback<String[]> getSetUpCallback() {
